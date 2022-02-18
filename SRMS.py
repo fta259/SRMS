@@ -45,7 +45,7 @@ def printPlayers():
     Insert the correct Python and SQL commands
     to print all players
     """
-    #Start your modifications after this comment
+    # Start your modifications after this comment
 
     return
 
@@ -56,7 +56,7 @@ def printTeachers():
     Insert the correct Python and SQL commands 
     to print all ranking information
     """
-    #Start your modifications after this comment
+    # Start your modifications after this comment
 
     cursor.execute("SELECT * FROM Teacher")
     print(cursor.fetchall())
@@ -69,7 +69,7 @@ def printMatches():
     Insert the correct Python and SQL commands 
     to print all ranking information
     """
-    #Start your modifications after this comment
+    # Start your modifications after this comment
 
     return
 
@@ -98,7 +98,7 @@ def moveMatch():
     Change the match date based on the given matchID and new matchdate
     IF a new matchdate is set to NULL, set the winner and result to NULL as well
     """
-    #Start your modifications after this comment
+    # Start your modifications after this comment
 
     return
 
@@ -110,7 +110,7 @@ def deletePlayer():
     Delete the Player and his Ranking information
     Additionally, set the playerid to NULL in ALL match-data it is found
     """
-    #Start your modifications after this comment
+    # Start your modifications after this comment
 
 
 main()
