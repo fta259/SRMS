@@ -4,15 +4,14 @@ cursor = db.cursor()
 
 
 def main():
-
     userInput = -1
     while(userInput != "0"):
-        print("\nMenu options:")
+        print("\n Some options you may choose:")
         print("1: Print Players")
         print("2: Print Teachers")
         print("3: Print Matches")
         print("4: Insert Department")
-        print("5: Move matchdate")
+        print("5: Update your Exam")
         print("6: Delete player")
         print("0: Quit")
         userInput = input("What do you want to do? ")
@@ -26,7 +25,7 @@ def main():
         if userInput == "4":
             insertDepartment()
         if userInput == "5":
-            moveMatch()
+            UpdateExam()
         if userInput == "6":
             deletePlayer()
         if userInput == "0":
@@ -76,6 +75,7 @@ def printMatches():
 
 def insertDepartment():
     print(" Please Insert a Department: ")
+
     departmentId = input('Department ID: ')
     departmentName = input('Department Name: ')
     studentId = input('Student ID: ')
@@ -89,16 +89,32 @@ def insertDepartment():
     return
 
 
-def moveMatch():
-    matchID = input("What is the matchID of the match you want to move? ")
-    newMatchDate = input("What is the new matchdate you want to set?")
+def UpdateExam():
+    print(" Please Update the exam if your course ID is between 600 to 603 : ")
+    #newMatchDate = input("What is the new matchdate you want to set?")
 
-    """ 
-    Using the correct Python and SQL comands:
-    Change the match date based on the given matchID and new matchdate
-    IF a new matchdate is set to NULL, set the winner and result to NULL as well
-    """
+    
     # Start your modifications after this comment
+    # #Course_ID = input('Course ID: ')
+    #regID = input('Registration ID: ')
+    #examDesc = input('Exam Description: ')
+
+    print("Insert course ID between 600 to 603. ")
+
+    courseID = input('Course ID: ')
+    marks = input('Marks: ')
+    #deptID = input('Dept_ID: ')
+    
+
+    #cursor.execute("""Update Exam SET Reg_No = , Marks = marks, 
+    #Dept_ID = deptID, Course_ID = courseID  where Marks > 50 """)
+
+    cursor.execute('UPDATE Exam SET Marks = ? WHERE  Course_ID = ? ', (marks,courseID))
+    
+
+    db.commit()
+    print('Data Updated successfully.')
+    db.close()
 
     return
 
