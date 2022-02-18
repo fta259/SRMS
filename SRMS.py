@@ -20,11 +20,11 @@ def main():
         if userInput == "1":
             printPlayers()
         if userInput == "2":
-            printRanking()
+            printTeachers()
         if userInput == "3":
             printMatches()
         if userInput == "4":
-            searchPlayer()
+            insertDepartment()
         if userInput == "5":
             moveMatch()
         if userInput == "6":
@@ -50,7 +50,7 @@ def printPlayers():
     return
 
 
-def printTeahers():
+def printTeachers():
     print("Printing Teachers")
     """
     Insert the correct Python and SQL commands 
@@ -74,24 +74,12 @@ def printMatches():
     return
 
 
-def searchPlayer():
-    playerName = input(" Please Insert a Department: ")
-    """ 
-    Insert the correct Python and SQL commands to find the player 
-    using the given surname
-    """
-    #Start your modifications after this comment
-
-    #print("ID:")
-    #print("First name:")
-    #print("Last name:")
-    #print("Birthdate: ")
-    #print("Nationality:")
-    print("Department ID: ")
+def insertDepartment():
+    print(" Please Insert a Department: ")
     departmentId = input('Department ID: ')
-    departmentName = input('Name of the Department : ')
-    studentId = input(' Your Student ID: ')
-    cursor.execute("""INSERT INTO Department(D_ID, D_Name, S_ID) VALUES (?,?,?,?) """,
+    departmentName = input('Department Name: ')
+    studentId = input('Student ID: ')
+    cursor.execute("""INSERT INTO Department(Dept_ID, Dept_Name, Stu_ID) VALUES (?,?,?) """,
                    (departmentId, departmentName, studentId))
 
     db.commit()
