@@ -7,27 +7,33 @@ def main():
     userInput = -1
     while(userInput != "0"):
         print("\n Some options you may choose:")
-        print("1: Print Players")
-        print("2: Print Teachers")
-        print("3: Print Matches")
-        print("4: Insert Department")
-        print("5: Update your Exam")
-        print("6: Delete player")
+        print("1: Print Students ")
+        print("2: Delete Teachers ")
+        print("3: Print Marks ")
+        print("4: Filtering Students ")
+        print("5: Average Marks ")
+        print("6: Insert Department ")
+        print("7: Update your Exam ")
+        print("8: Visualization ")
         print("0: Quit")
         userInput = input("What do you want to do? ")
         print(userInput)
         if userInput == "1":
-            printPlayers()
+            printStudents()
         if userInput == "2":
-            printTeachers()
+            deleteTeachers()
         if userInput == "3":
-            printMatches()
+            printMarks()
         if userInput == "4":
-            insertDepartment()
+            filterStudents()   
         if userInput == "5":
-            UpdateExam()
+            averageMarks()    
         if userInput == "6":
-            deletePlayer()
+            insertDepartment()
+        if userInput == "7":
+            UpdateExam()
+        if userInput == "8":
+            visualization()
         if userInput == "0":
             print("Ending software...")
     db.close()
@@ -38,39 +44,68 @@ def main():
 
 
 ############## Please modify the following ##############
-def printPlayers():
-    print("Printing players")
-    """
-    Insert the correct Python and SQL commands
-    to print all players
-    """
-    # Start your modifications after this comment
-
-    return
-
-
-def printTeachers():
-    print("Printing Teachers")
-    """
-    Insert the correct Python and SQL commands 
-    to print all ranking information
-    """
-    # Start your modifications after this comment
-
-    cursor.execute("SELECT * FROM Teacher")
+def printStudents():
+    print("Printing Students who lives in Vantaa")
+    
+    cursor.execute("SELECT S_Name, S_Mail FROM student WHERE S_Address_City = 'vantaa'")
     print(cursor.fetchall())
+    
+    db.commit()
     return
+     
+
+def deleteTeachers():
+    print("Delete Teachers who has gmails. ")
+    
+    cursor.execute("DELETE FROM Teacher WHERE T_Mail LIKE '%l'")
+    print(cursor.fetchall())
+
+    print("Congratulation!Successfully Deleted. ")
+    
+    db.commit()
+    return
+   
 
 
-def printMatches():
-    print("Printing matches")
+def printMarks():
+    print("Printing Marks and Department who lives in Helsinki")
     """ 
     Insert the correct Python and SQL commands 
     to print all ranking information
     """
     # Start your modifications after this comment
 
+    cursor.execute(" SELECT ExamDesc, Marks, Dept_Name, S_Address_City, S_Mail FROM Exam JOIN Department JOIN student WHERE S_Address_City = 'helsinki' GROUP BY Marks ")
+    print(cursor.fetchall())
+
+
+    db.commit()
     return
+
+
+def filterStudents():
+    print("Delete Teachers who has gmails. ")
+    
+    cursor.execute("Select S_Name, S_Address_City, S_Address_Street, S_Phone, S_Mail, S_DOB, S_Address_PostalCode FROM student WHERE  S_Mail LIKE '%gmail' AND S_Address_City = 'helsinki' ORDER by S_Address_PostalCode ASC")
+    print(cursor.fetchall())
+
+    
+    db.commit()
+    return
+
+def averageMarks():
+    print(" The Average marks of the final exam is: ")
+    
+    cursor.execute("SELECT AVG(Marks) FROM Exam JOIN Department WHERE ExamDesc = 'FINAL'")
+    print(cursor.fetchall())
+
+    
+    db.commit()
+    return
+
+
+   
+
 
 
 def insertDepartment():
@@ -84,7 +119,6 @@ def insertDepartment():
 
     db.commit()
     print('Data entered successfully.')
-    db.close()
 
     return
 
@@ -112,14 +146,14 @@ def UpdateExam():
     cursor.execute('UPDATE Exam SET Marks = ? WHERE  Course_ID = ? ', (marks,courseID))
     
 
+
     db.commit()
     print('Data Updated successfully.')
-    db.close()
 
     return
 
 
-def deletePlayer():
+def visualization():
     playerID = input("What is the player's PlayerID? ")
     """ 
     Using the correct Python and SQL comands:
