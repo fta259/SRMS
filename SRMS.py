@@ -45,9 +45,9 @@ def main():
 
 ############## Please modify the following ##############
 def printStudents():
-    print("Printing Students who lives in Vantaa")
+    print("Printing Students who took Chemistry in this semester")
     
-    cursor.execute("SELECT S_Name, S_Mail FROM student WHERE S_Address_City = 'vantaa'")
+    cursor.execute("SELECT S_Name, S_Mail FROM student JOIN Course WHERE Title  = 'Chemistry' GROUP BY S_Address_PostalCode")
     print(cursor.fetchall())
     
     db.commit()
@@ -110,6 +110,7 @@ def averageMarks():
 
 def insertDepartment():
     print(" Please Insert a Department: ")
+    
 
     departmentId = input('Department ID: ')
     departmentName = input('Department Name: ')
@@ -154,7 +155,7 @@ def UpdateExam():
 
 
 def visualization():
-    playerID = input("What is the player's PlayerID? ")
+    #playerID = input("What is the player's PlayerID? ")
     """ 
     Using the correct Python and SQL comands:
     Delete the Player and his Ranking information
